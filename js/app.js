@@ -1,10 +1,10 @@
 // 'use strict';
 
 Vue.component('product', {
-    props: ['image','title'],
+    props: ['image','title','id'],
     template: `
     
-    <div class="col s4 m2">
+    <div class="col s4 m2" v-on:click="detailsProductosCare(id)">
       <div class="card">
         <div class="card-image">
         <a href=""><img :src="image"></a>
@@ -16,7 +16,27 @@ Vue.component('product', {
         </div>
       </div>
     </div>
-    `
+    `,
+    methods: {
+        detailsProductosCare: function (id){
+            console.log(id);
+            
+
+                $.ajax({
+                    url:`https://api.mercadolibre.com/items/${id}`,
+                    type: 'GET',
+                    datatype: 'json',
+                })
+                .done((response)=>{
+                    console.log(response);
+                    // this.products = response.results;
+                })
+                .fail(()=>{
+                    console.log("error");
+                })
+            
+        }
+    }
 //     template: `
 //     <div class="card col s2">
 //     <div class="card-image waves-effect waves-block waves-light">
@@ -35,13 +55,13 @@ Vue.component('product', {
 })
 
 const app = new Vue ({
-    el: '#personal-care',
+    el: '#vue',
     data: {
         products:[],
 
     },
     methods: {
-
+        
         ajaxPersonalCare: function (){
 
             $.ajax({
@@ -57,8 +77,10 @@ const app = new Vue ({
                 console.log("error");
             })
         }
-    }
+    },
+
+        
 
 })
 
-app.ajaxPersonalCare();
+// app.ajaxPersonalCare();

@@ -30,6 +30,11 @@ nav ul{
     /* top: 10rem; */
 }
 
+
+#paypal-button {
+    z-index: 10;
+}
+
 h5 {
  color: brown;
  font-style: italic;
@@ -41,6 +46,7 @@ h5 {
 
 #data-product {
     padding-left: 2rem;
+    margin-left: 1rem;
 }
 
 #product-card {

@@ -19,9 +19,12 @@ nav ul{
 
 
 
-/* #detail-product {
-    margin-top: 15rem;
-} */
+#paypal-button {
+    position: absolute;
+    right: 1rem;
+    top: .3rem;
+    /* margin-left: 30rem; */
+}
 
 #content-template  {
     /* position: absolute; */

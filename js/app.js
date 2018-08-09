@@ -10,7 +10,7 @@ Vue.component('product', {
             <div class="card-image">
                 <img :src="image">
                 <span class="card-title"></span>
-                <a id="btn"class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i v-on:click="detailsProductos(id)" class="material-icons">add_shopping_cart</i></a>
+                <a id="btn"class="btn-floating halfway-fab waves-effect waves-light red" href="#"><i v-on:click="detailsProductos(id)" class="material-icons">add</i></a>
             </div>
         <div id="product-card" class="card-content">
             <p id="pro-title" >{{ title }}</p>
@@ -108,7 +108,7 @@ function printingDetails(element){
             <a href="#" onClick="cleanAreaOfProductsDetails()"><i class="material-icons close col m1" >close</i></a>
         </div>
     </div>`;
-    
+
 // POR UNA EXTRAÑA RAZÓN NO SE MUESTRAN LAS IMÁGENES (a pesar de que en consola "se ve" que existen)
     // let template = `
     // <div id="content-template">
@@ -141,28 +141,6 @@ function printingDetails(element){
   $('#detail-product').append(template);
 }
 
-paypal.Button.render({
-    env: 'sandbox',
-    client: {
-      sandbox: 'AVV84egHJKjWrgThBBOUtGVCnjbwobr25B_2wac2NVT89ldyC2QmxxMTJ94YMlk5p-kWD6VWo3yTLpE2',
-    },
-    payment: function (data, actions) {
-      return actions.payment.create({
-        transactions: [{
-          amount: {
-            total: '500000.00',
-            currency: 'MXN'
-          }
-        }]
-      });
-    },
-    onAuthorize: function (data, actions) {
-      return actions.payment.execute()
-        .then(function () {
-          window.alert('Thank you for your purchase!');
-        });
-    }
-  }, '#paypal-button');
 
 
   
@@ -171,10 +149,33 @@ function cleanAreaOfProductsDetails (){
 }
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.slider');
     var instances = M.Slider.init(elems, true);
     
+    paypal.Button.render({
+        env: 'sandbox',
+        client: {
+          sandbox: 'AVV84egHJKjWrgThBBOUtGVCnjbwobr25B_2wac2NVT89ldyC2QmxxMTJ94YMlk5p-kWD6VWo3yTLpE2',
+        },
+        payment: function (data, actions) {
+          return actions.payment.create({
+            transactions: [{
+              amount: {
+                total: '500000.00',
+                currency: 'MXN'
+              }
+            }]
+          });
+        },
+        onAuthorize: function (data, actions) {
+          return actions.payment.execute()
+            .then(function () {
+              window.alert('Thank you for your purchase!');
+            });
+        }
+      }, '#paypal-button');
 
     
   });

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href="./css/app.css">
   <title>Take My Money</title>
 </head>
 <body>
@@ -21,8 +22,7 @@
         </ul>
       </div>
       <div class="nav-content">
-        <ul class="tabs tabs-transparent hide-on-med-and-down">
-          
+        <ul class="tabs  hide-on-med-and-down">
           <li class="tab"><a href="#test1">Home&Kitchen</a></li>
           <li class="tab"><a class="" href="#personal" @click="ajaxPersonalCare()">Personal Care</a></li>
           <li class="tab"><a href="#test3">Furniture</a></li>
@@ -36,21 +36,54 @@
       <li><a href="badges.html">Components</a></li>
       <li><a href="collapsible.html">JavaScript</a></li>
     </ul>
-    <section id="personal" class="row">
-      <div id="personal-care" class="row">
+    <!-- AREA OF THE DETAILS OF THE PRODUCTS-->
+    <section id="detail-product"></section>
+    <!-- TEMPLATE: DETAILS OF THE PRODUCTS -->
+    <div id="content-template" style="display: none">
+      <div class="row">
+            <div class="slider offset-m1 offset-l1 col s12 m6 l6">
+                <ul class="slides">
+                  <li>
+                    <img src="https://mlstaticquic-a.akamaihd.net/shampoo-y-4-jabones-marca-lush-cosmetics-D_NQ_NP_708414-MLA27822183731_072018-F.webp"> 
+                  </li>
+                  <li>
+                    <img src="https://mlstaticquic-a.akamaihd.net/shampoo-y-4-jabones-marca-lush-cosmetics-D_NQ_NP_884168-MLA27822185719_072018-F.webp1"> 
+                  </li>
+                  <li>
+                    <img src="https://mlstaticquic-a.akamaihd.net/shampoo-y-4-jabones-marca-lush-cosmetics-D_NQ_NP_880545-MLA27822169981_072018-F.webp">
+                  </li>
+                  <li>
+                    <img src="https://mlstaticquic-a.akamaihd.net/shampoo-y-4-jabones-marca-lush-cosmetics-D_NQ_NP_932720-MLA27822188675_072018-F.webp">
+                  </li>
+                </ul>
+              </div>
+              <div id="data-product" class="col s12 m4">
+                <h4>Nombre del producto</h4>
+                <h5>$109.00</h5>
+              </div>
+      </div>
+      
+    </div>
+    
+
+    <!--  PERSONAL CARE SECTION -->
+    <section id="personal-care" class="row">
         <product 
         v-for="(product, index) in products"
         :key="index"
         :title="product.title"
         :image="product.thumbnail"
+        :price="product.price"
         :id="product.id">
       </product>
       <!-- <div v-for="product in products">
         {{product.title}}
       </div> -->
-    </div>
+    
   </section>
-  <section id="test1" class="col s12"></section>
+  <section id="homeKitche" class="col s12">
+
+  </section>
   
   <div id="test3" class="col s12"></div>
   <div id="test4" class="col s12"></div>
@@ -61,10 +94,9 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="js/app.js"></script>

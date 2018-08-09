@@ -1,20 +1,22 @@
-// 'use strict';
+'use strict';
+
+let dataDetail=[];
 
 Vue.component('product', {
-    props: ['image','title','id'],
+    props: ['image','title','price','id'],
     template: `
-    
-    <div class="col s4 m2" v-on:click="detailsProductosCare(id)">
-      <div class="card">
-        <div class="card-image">
-        <a href=""><img :src="image"></a>
-          <span class="card-title"></span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+    <div class="col s4 m2" >
+        <div  class="card card-height" >
+            <div class="card-image">
+                <img :src="image">
+                <span class="card-title"></span>
+                <a id="btn"class="btn-floating halfway-fab waves-effect waves-light red"><i v-on:click="detailsProductosCare(id)" class="material-icons">add_shopping_cart</i></a>
+            </div>
+        <div id="product-card" class="card-content">
+            <p id="pro-title" >{{ title }}</p>
+            <p class="price">$ {{ price }}.00</p>
         </div>
-        <div class="card-content">
-          <p>{{ title}}</p>
         </div>
-      </div>
     </div>
     `,
     methods: {
@@ -28,8 +30,8 @@ Vue.component('product', {
                     datatype: 'json',
                 })
                 .done((response)=>{
-                    console.log(response);
-                    // this.products = response.results;
+                    // console.log(response);
+                    printingDetails(response);
                 })
                 .fail(()=>{
                     console.log("error");
@@ -37,28 +39,31 @@ Vue.component('product', {
             
         }
     }
-//     template: `
-//     <div class="card col s2">
-//     <div class="card-image waves-effect waves-block waves-light">
-//       <img class="activator" :src="image">
-//     </div>
-//     <div class="card-content">
-//       <span class="card-title activator grey-text text-darken-4">{{ title }}<i class="material-icons right">more_vert</i></span>
-      
-//     </div>
-//     <div class="card-reveal">
-//       <span class="card-title grey-text text-darken-4">{{ title }}<i class="material-icons right">close</i></span>
-//       <p>Here is some more information about this product that is only revealed once clicked on.</p>
-//     </div>
-//   </div>
-//   `
 })
+
+// PRUEBA DEL COMPONENTE PARA MOSTRAR LOS DETALLES
+// Vue.component('detailsProduct', {
+//     props: ['image','title','price'],
+//     template:
+//     `<h3>{{ title}}</h3>
+//     <h6>{{ price }}</h6>
+//     <div class="carousel">
+//         <a class="carousel-item" href="#one!"><img :src="image"></a>
+//         <a class="carousel-item" href="#two!"><img :src="image"></a>
+//         <a class="carousel-item" href="#three!"><img :src="image"></a>
+//         <a class="carousel-item" href="#four!"><img :src="image"></a>
+//         <a class="carousel-item" href="#five!"><img :src="image"></a>
+//     </div>`
+
+// })
+
+
+
 
 const app = new Vue ({
     el: '#vue',
     data: {
         products:[],
-
     },
     methods: {
         
@@ -77,10 +82,59 @@ const app = new Vue ({
                 console.log("error");
             })
         }
-    },
-
-        
-
+    }
 })
 
-// app.ajaxPersonalCare();
+
+function printingDetails(element){
+    // console.log(element);
+    let productName = element.title;
+    // console.log(productName);
+    let productPrice = element.price;
+    let image1= element.pictures[0].url;
+    console.log(image1);
+
+    let template = `<div id="content-template">
+    <div class="row">
+          <div class="slider offset-m1 offset-l1 col s12 m6 l6">
+              <ul class="slides">
+                <li>
+                  <img src="${image1}"> 
+                </li>
+                <li>
+                  <img src="${image1}"> 
+                </li>
+                <li>
+                  <img src="${image1}">
+                </li>
+                <li>
+                  <img src="${image1}">
+                </li>
+              </ul>
+            </div>
+            <div id="data-product" class="col s12 m4">
+              <h4>${productName}</h4>
+              <h5>$${productPrice}.00</h5>
+              <img src="${image1}">
+            </div>
+    </div>
+    
+  </div>`;
+ 
+  $('#detail-product').append(template);
+//   console.log($('#detail-product'));
+
+
+
+    
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems, true);
+    $("#detail-product").empty();
+  });
+
+  

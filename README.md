@@ -1,9 +1,10 @@
 # Take my Money (e-commerce)
 
 * **Desarrolladora:** _Ámbar de Alejandría_
+## Desarrollado para [Laboratoria](http://laboratoria.la)
 
 ***
-
+![image](https://user-images.githubusercontent.com/37434578/44624415-c3a84f80-a8b3-11e8-8488-c0c2b57dbf17.png)
 
 ## Objetivo del producto final
 ###### _Información proporcionada por Laboratoria_

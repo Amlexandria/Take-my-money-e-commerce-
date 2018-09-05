@@ -103,7 +103,7 @@ function printingDetails(element){
             <div id="data-product" class="col s12 m3">
               <h4>${productName}</h4>
               <h5>$${productPrice}.00</h5>
-              <div id="paypal-button"></div> 
+              <div id="paypal-detail"></div> 
             </div>
             <a href="#" onClick="cleanAreaOfProductsDetails()"><i class="material-icons close col m1" >close</i></a>
         </div>
@@ -139,6 +139,71 @@ function printingDetails(element){
     // </div>`;
  
   $('#detail-product').append(template);
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AVV84egHJKjWrgThBBOUtGVCnjbwobr25B_2wac2NVT89ldyC2QmxxMTJ94YMlk5p-kWD6VWo3yTLpE2',
+      production: 'demo_production_client_id'
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+      size: 'small',
+      color: 'gold',
+      shape: 'pill',
+    },
+    // Set up a payment
+    // Set up a payment
+  payment: function (data, actions) {
+    return actions.payment.create({
+      transactions: [{
+        amount: {
+          total: productPrice,
+          currency: 'MXN',
+          
+        },
+        description: 'The payment transaction description.',
+        custom: '90048630024435',
+        //invoice_number: '12345', Insert a unique invoice number
+        payment_options: {
+          allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+        },
+        soft_descriptor: 'ECHI5786786',
+        item_list: {
+          items: [
+            {
+              name: productName,
+              quantity: '1',
+              price: productPrice,
+              currency: 'MXN'
+            },
+            
+          ],
+          shipping_address: {
+            recipient_name: 'Brian Robinson',
+            line1: '4th Floor',
+            line2: 'Unit #34',
+            city: 'San Jose',
+            country_code: 'US',
+            postal_code: '95131',
+            phone: '011862212345678',
+            state: 'CA'
+          }
+        }
+      }],
+      note_to_payer: 'Contact us for any questions on your order.'
+    });
+  },
+    // Execute the payment
+    onAuthorize: function (data, actions) {
+      return actions.payment.execute()
+        .then(function () {
+          // Show a confirmation message to the buyer
+          window.alert('Thank you for your purchase!');
+        });
+    }
+  }, '#paypal-detail');
 }
 
 
